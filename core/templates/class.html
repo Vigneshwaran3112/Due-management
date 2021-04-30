@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class Creation page</title>
+</head>
+<body>
+<a href="/">logout</a>
+    <div>
+        <form action="/class_details/" method="POST">
+            {% csrf_token %}
+            <label>name</label>
+            <input type="text" name="name" placeholder="enter class name" /><br>
+            <label>code</label>
+            <input type="text" name="code" placeholder="enter code" /><br>
+            <input type="submit" value="create"/><br>
+        </form>
+    </div>
+
+</body>
+</html>

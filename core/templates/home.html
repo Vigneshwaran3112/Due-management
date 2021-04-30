@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <style>
+        button{
+            border: none;
+            outline: none;
+            background-color: floralwhite;
+        }
+        a{
+            color: darkslategray;
+        }
+        .due_th{
+            padding: 5px;
+            {#border-right: 1px solid black;#}
+            background-color: bisque
+        }
+        .due_td{
+            padding: 5px;
+        }
+        .class_due_td, .class_due_th{
+            padding: 10px;
+        }
+        .student_wise_due_td{
+            padding: 25px;
+        }
+    </style>
+</head>
+<body>
+{#Welcome, {{ user.username }}#}
+<a href="/">logout</a>
+
+<br>
+<center>
+<div class="container">
+
+<h1>Due</h1><br><br>
+<div class="row">
+{% for values in data %}
+
+        <div class="col-md-4 col-sm-12">
+            <table style="outline: 1px solid black; width: 100%; margin: 20px;">
+                <tr>
+                    <th class="due_th">Year</th>
+                    <td class="due_td" style="font-weight: bold">{{ values.0 }}</td>
+                </tr>
+                <tr>
+                    <th class="due_th">Due of {{ yesterday_date }}</th>
+                    <td class="due_td">Rs. {{ values.3 }}</td>
+                </tr>
+                <tr>
+                    <th class="due_th">Paid till {{ current_date }}</th>
+                    <td class="due_td">Rs. {{ values.1 }}</td>
+                </tr>
+                <tr>
+                    <th class="due_th">Due Balance</th>
+                    <td class="due_td">Rs. {{ values.2 }}</td>
+                </tr>
+            </table>
+
+        </div><br>
+{% endfor %}
+</div><br><br>
+</div>
+
+
+
+<table>
+    <tr>
+        <td>
+{#            <button><a href="/due_class_wise/">Due Class Wise List</a></button>#}
+            <div style="margin-top: 70px">
+                <h4 style="margin-bottom: -150px">Due Class Wise List</h4>
+                <table style="outline: 1px solid black">
+
+                    <thead style="background-color: bisque">
+                        <th class="class_due_th">Class</th>
+                        <th class="class_due_th">2019-2020</th>
+                        <th class="class_due_th">2020-2021</th>
+                        <th class="class_due_th">2021-2022</th>
+                    </thead>
+                    <tbody>
+                        {% for lis in due_data %}
+                        <tr>
+                                {% for i in lis %}
+
+                                    <td class="class_due_td">{{ i }}</td>
+
+                                {% endfor %}
+                        </tr><br>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    <td>
+{#        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>#}
+        <table>
+            <tr>
+
+                <td class="student_wise_due_td">
+                    <button><a href="/due_student_wise/">Student Wise Current Due</a></button>
+                </td>
+            </tr>
+            <tr>
+                <td class="student_wise_due_td">
+                    <button><a href="/student_due_on_till_date/">Student Due on {{ yesterday_date }}</a></button>
+                </td>
+            </tr>
+            <tr>
+                <td class="student_wise_due_td">
+                    <button><a href="/paid_amount_list/">Payment Info</a></button>
+                </td>
+            </tr>
+        </table>
+    </td>
+    </tr>
+</table>
+
+</center>
+
+
+
+
+</body>
+</html>

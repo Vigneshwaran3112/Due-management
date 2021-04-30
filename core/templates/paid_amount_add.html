@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Paid Amount Add Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<a href="/">logout</a>
+<center>
+    <div style="margin-top: 100px">
+        {{ msg }}
+    <h2>Payment</h2><br><br>
+        <form action="/paid_amount_add/" method="POST">
+            {% csrf_token %}
+        <table>
+            <tr>
+            <td>
+            <label>Name</label>
+            </td>
+            <td>
+            <select name="student" onchange="MyJavaScript(this)" id="ddlViewBy">
+                {% for stud in student %}
+                    <option value={{stud.pk}} selected>{{stud}}</option>
+                {% endfor %}
+            </select>
+            </td>
+            </tr>
+            <tr>
+                <td>
+                    Due amount:
+                </td>
+                <td>
+                    <p id="total_amount"></p>
+                </td>
+            </tr>
+            <tr>
+            <td><label>Amount</label></td>
+            <td><input type="number" name="amount" placeholder="enter amount" /></td>
+            </tr>
+            <tr>
+            <td><input type="submit" value="Pay Now"/></td>
+            </tr>
+        </table>
+        </form><br><br>
+    <button><a style="text-decoration: none; color: black" href="/paid_amount_list/">view paid amount list</a></button><br><br>
+    </div>
+</center>
+
+
+<script>
+    var value = '/student_total_due/'
+    function MyJavaScript(dropdown)
+    {
+        var option_value = dropdown.options[dropdown.selectedIndex].value;
+        var url = value.concat(option_value.toString())
+        axios.get(url)
+      .then(function (response) {
+        document.getElementById("total_amount").innerHTML = response.data;
+  })
+    }
+    var e = document.getElementById("ddlViewBy");
+    var n = (e.value).toString()
+    {#var value = '/student_total_due/'#}
+    var url = value.concat(n);
+    axios.get(url)
+      .then(function (response) {
+        document.getElementById("total_amount").innerHTML = response.data;
+     })
+</script>
+
+</body>
+</html>

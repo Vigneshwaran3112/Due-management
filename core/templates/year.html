@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Years Creation page</title>
+</head>
+<body>
+<a href="/">logout</a>
+    <div>
+        <form action="/year_details/" method="POST">
+            {% csrf_token %}
+            <label>year</label>
+            <input type="text" name="year" placeholder="enter year" /><br>
+            <label>code</label>
+            <input type="text" name="code" placeholder="enter code" /><br>
+            <input type="submit" value="create"/><br>
+        </form>
+    </div>
+
+</body>
+</html>

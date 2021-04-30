@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Creation</title>
+</head>
+<body>
+<a href="/">logout</a>
+    <div>
+        <form action="/student/" method="POST">
+            {% csrf_token %}
+            <label>Student id</label>
+            <input type="text" name="student_id" placeholder="enter student id" /><br>
+            <label>Student name</label>
+            <input type="text" name="name" placeholder="enter student name" /><br>
+            <label>Class</label>
+            <select name="standard" id="sem">
+                {% for standard in standards %}
+                    <option value={{standard.id}} selected>{{standard.name}}</option>
+                {% endfor %}
+            </select><br>
+
+            <input type="submit" value="create"/><br>
+        </form>
+    </div>
+
+</body>
+</html>
